@@ -1,1 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSBM NFORCE - Premium Student Hub</title>
+    <style>
+        :root {
+            --nsbm-dark-green: #0A4A44; /* Hasitha's Pine Deep */
+            --nsbm-pine: #0E6B63;       /* Hasitha's Pine */
+            --nsbm-coral: #EE6C4D;      /* Hasitha's Coral Accent */
+            --nsbm-bg: #FDFBF7;         /* Warm Cream Background */
+            --card-white: #FFFFFF;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: var(--nsbm-bg);
+            color: #2D3748;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 1. Sticky Premium Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--nsbm-dark-green);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            height: 100%;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+        }
+
+        .sidebar .logo-area {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
+            color: var(--nsbm-bg);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        .sidebar a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 14px 18px;
+            margin-bottom: 6px;
+            border-radius: 12px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: white;
+            font-weight: 600;
+            transform: translateX(4px);
+        }
+
+        /* 2. Main Work Container */
+        .main-container {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            height: 100%;
+        }
+
+        /* Dynamic Page Section Control */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active-page {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & General Components */
+        h1 {
+            font-size: 32px;
+            color: var(--nsbm-dark-green);
+            font-family: 'Georgia', serif;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: var(--card-white);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #ECE9E2;
+            box-shadow: 0 4px 20px rgba(15, 76, 58, 0.02);
+            margin-bottom: 25px;
+        }
+
+        .btn-premium {
+            background-color: var(--nsbm-coral);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-premium:hover {
+            background-color: #d6583b;
+        }
+
+        /* Vacancies Cards Styling */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .job-card {
+            border-top: 4px solid var(--nsbm-pine);
+        }
+
+        .match-badge {
+            background-color: #E6F4F1;
+            color: var(--nsbm-pine);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            float: right;
+        }
+
+        /* Input Form Styles (Request Letter / Profile) */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #D1CAC0;
+            border-radius: 10px;
+            background-color: #FFF;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION PANEL (ALL PAGES INTEGRATED) -->
+    <div class="sidebar">
+        <div class="logo-area">NFORCE Premium</div>
+        <a onclick="switchPage('dashboard')" id="nav-dashboard" class="active">🏠 Dashboard</a>
+        <a onclick="switchPage('vacancies')" id="nav-vacancies">💼 Vacancies</a>
+        <a onclick="switchPage('applications')" id="nav-applications">📄 Applications</a>
+        <a onclick="switchPage('ai-toolkit')" id="nav-ai-toolkit">🤖 AI Toolkit Hub</a>
+        <a onclick="switchPage('request-letter')" id="nav-request-letter">✉️ Request Letter</a>
+        <a onclick="switchPage('profile')" id="nav-profile">👤 My Profile</a>
+    </div>
+
+    <div class="main-container">
+
+        <!-- 1. HOMEPAGE / DASHBOARD SECTION -->
+        <div id="page-dashboard" class="page-section active-page">
+            <h1>Your career is not a deadline. It's a climb. ⛰️</h1>
+            <div class="card" style="background: linear-gradient(135deg, #0A4A44 0%, #0E6B63 100%); color: white;">
+                <h2 style="font-size: 26px; margin-bottom: 15px; font-family: 'Georgia', serif;">Welcome back, Malshi!</h2>
+                <p style="opacity: 0.9; margin-bottom: 20px; max-width: 600px;">Track your ongoing industrial training progress, optimize your CV with interactive AI assistance, and browse validated corporate vacancies seamlessly.</p>
+                <button class="btn-premium" onclick="switchPage('vacancies')">Explore Vacancies →</button>
+            </div>
+            <div class="card" style="background-color: #E8F5F1; border-color: #C3ECE1;">
+                <h3 style="color: var(--nsbm-dark-green); margin-bottom: 5px;">🔥 6 Day Streak</h3>
+                <p style="font-size: 14px; opacity: 0.8;">You've consistently refined your career readiness tasks this entire week. Keep driving forward!</p>
+            </div>
+        </div>
+
+        <!-- 2. VACANCIES SECTION -->
+        <div id="page-vacancies" class="page-section">
+            <h1>Available Vacancies</h1>
+            <div class="grid-3">
+                <div class="card job-card">
+                    <span class="match-badge">96% Match</span>
+                    <h3 style="margin-bottom: 5px;">Software Engineering Intern</h3>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">FIDA Global (Colombo)</p>
+                    <button class="btn-premium" style="padding: 10px 20px; font-size: 13px;">Apply Now</button>
+                </div>
+                <div class="card job-card">
+                    <span class="match-badge">88% Match</span>
+                    <h3 style="margin-bottom: 5px;">Associate QA Engineer</h3>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">Sysco LABS (Colombo)</p>
+                    <button class="btn-premium" style="padding: 10px 20px; font-size: 13px;">Apply Now</button>
+                </div>
+                <div class="card job-card">
+                    <span class="match-badge">82% Match</span>
+                    <h3 style="margin-bottom: 5px;">Data Analyst Intern</h3>
+                    <p style="color: #666; font-size: 14px; margin-bottom: 15px;">WSO2 (Remote)</p>
+                    <button class="btn-premium" style="padding: 10px 20px; font-size: 13px;">Apply Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. APPLICATIONS SECTION -->
+        <div id="page-applications" class="page-section">
+            <h1>My Applications</h1>
+            <div class="card" style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 48px; margin-bottom: 15px;">💼</div>
+                <h3 style="margin-bottom: 10px; font-family: 'Georgia', serif;">Nothing submitted yet, and that's okay.</h3>
+                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">When you apply to internship modules, they will automatically sync right here so you can verify status processing.</p>
+                <button class="btn-premium" onclick="switchPage('vacancies')">Browse Vacancies</button>
+            </div>
+        </div>
+
+        <!-- 4. AI TOOLKIT HUB -->
+        <div id="page-ai-toolkit" class="page-section">
+            <h1>AI Career Toolkit Hub</h1>
+            <div class="card" style="border-left: 5px solid var(--nsbm-pine);">
+                <h3 style="margin-bottom: 10px;">AI CV Reviewer</h3>
+                <p style="color: #555; font-size: 14px; margin-bottom: 15px;">Upload your standard PDF layout resume to immediately cross-verify structural alignment against target system parsers.</p>
+                <button class="btn-premium" style="padding: 10px 22px;">Scan Profile Document</button>
+            </div>
+            <div class="card" style="border-left: 5px solid var(--nsbm-coral);">
+                <h3 style="margin-bottom: 10px;">AI Mock Interview Simulator</h3>
+                <p style="color: #555; font-size: 14px; margin-bottom: 15px;">Practice challenging technical and behavioral corporate questions tailored to Software Engineering benchmarks within a pressure-free virtual space.</p>
+                <button class="btn-premium" style="padding: 10px 22px;">Initiate Simulator</button>
+            </div>
+        </div>
+
+        <!-- 5. REQUEST LETTER SECTION -->
+        <div id="page-request-letter" class="page-section">
+            <h1>Request an Internship Letter</h1>
+            <div class="card">
+                <form onsubmit="event.preventDefault(); alert('Letter Request Dispatched Successfully!');">
+                    <div class="form-group">
+                        <label>Select Letter Type</label>
+                        <select>
+                            <option>Industrial Training Placement Letter</option>
+                            <option>Internship Completion Clearance Letter</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Organization / Company Name</label>
+                        <input type="text" placeholder="e.g. Sysco LABS or Virtusa" required>
+                    </div>
+                    <button type="submit" class="btn-premium">Submit Official Request</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 6. MY PROFILE SECTION -->
+        <div id="page-profile" class="page-section">
+            <h1>My Profile</h1>
+            <div class="card">
+                <h2 style="font-family: 'Georgia', serif; color: var(--nsbm-dark-green); margin-bottom: 5px;">Malshi Dewmini</h2>
+                <p style="color: #666; font-size: 14px; margin-bottom: 20px;">BSc (Hons) Software Engineering | Faculty of Computing</p>
+                <hr style="border: 0; border-top: 1px solid #ECE9E2; margin-bottom: 20px;">
+                <p style="font-size: 15px; margin-bottom: 8px;"><strong>Student ID:</strong> NSBM-SE-34212</p>
+                <p style="font-size: 15px; margin-bottom: 8px;"><strong>CV Completion Status:</strong> 85%</p>
+                <p style="font-size: 15px;"><strong>Registered Track:</strong> 2nd Year, 1st Semester Undergraduate</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR ENGINE CONTROL -->
+    <script>
+        function switchPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Deactivate all sidebar anchors
+            const navLinks = document.querySelectorAll('.sidebar a');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            // Activate specific targets
+            document.getElementById('page-' + pageId).classList.add('active-page');
+            document.getElementById('nav-' + pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
